@@ -1,0 +1,31 @@
+const router = require("express").Router();
+
+router.get("/notes", (req, res) => {
+  let results = zookeepers;
+  if (req.query) {
+    results = filterByQuery(req.query, results);
+  }
+  res.json(results);
+});
+
+router.delete("/notes/:id", (req, res) => {
+  const result = findById(req.params.id, zookeepers);
+  if (result) {
+    res.json(result);
+  } else {
+    res.send(404);
+  }
+});
+
+router.post("/notes", (req, res) => {
+  req.body.id = zookeepers.length.toString();
+
+  if (!validateZookeeper(req.body)) {
+    res.status(400).send("The not is not properly formatted.");
+  } else {
+    const zookeeper = createNewZookeeper(req.body, zookeepers);
+    res.json(zookeeper);
+  }
+});
+
+module.exports = router;
