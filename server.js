@@ -1,8 +1,5 @@
-
 const apiRoutes = require('./Develop/routes/apiRoutes');
-
 const htmlRoutes = require('./Develop/routes/htmlRoutes');
-
 const fs = require('fs');
 const path = require('path');
 
