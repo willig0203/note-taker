@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const router = require("express").Router();
 const { query } = require("express");
+const { db } = require("../../db/db");
 
 const { v4: uuidv4 } = require("uuid");
 // uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
@@ -13,11 +14,28 @@ router.get("/notes", (req, res) => {
 });
 
 router.delete("/notes:id", (req, res) => {
-  const result = db.filter((db) => db.id === req.query.id)[0];
+  const id = req.params.id.replace(":", "");
+  const result = db.filter((db) => db.id === id);
+
   if (result) {
-    res.json(result);
+    res.json(result); // deleted item
+    const index = db.findIndex((x) => x.id === id);
+    const newdb = new Array();
+
+    if (index !== undefined) {
+      for (var i = 0; i < db.length; i++) {
+        if (i !== index) {
+          newdb.push(db[i]);
+        }
+      }
+
+      fs.writeFileSync(
+        path.join(__dirname, "../../db/db.json"),
+        JSON.stringify({ db: newdb }, null, 2)
+      );
+    }
   } else {
-    res.send(404);
+    res.sendStatus(404);
   }
 });
 
