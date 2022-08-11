@@ -1,3 +1,2 @@
 .DS_Store
-Develop/node_modules/
-/Assets
+node_modules/
