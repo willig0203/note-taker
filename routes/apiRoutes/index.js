@@ -3,9 +3,9 @@ const path = require("path");
 const router = require("express").Router();
 const { query } = require("express");
 const { db } = require("../../db/db");
+const fileName = "../../db/db.json";
 
 const { v4: uuidv4 } = require("uuid");
-// uuidv4(); // ⇨ '1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed'
 
 // get all notes
 router.get("/notes", (req, res) => {
@@ -30,7 +30,7 @@ router.delete("/notes:id", (req, res) => {
       }
 
       fs.writeFileSync(
-        path.join(__dirname, "../../db/db.json"),
+        path.join(__dirname, fileName),
         JSON.stringify({ db: newdb }, null, 2)
       );
     }
@@ -42,12 +42,12 @@ router.delete("/notes:id", (req, res) => {
 router.post("/notes", (req, res) => {
   const note = req.body;
   note.id = uuidv4();
-  fs.readFile("../../../Develop/db/db.json", "utf8", function (err, data) {
-    // Display the file content
-    console.log(data);
-  });
   db.push(note);
-  fs.writeFileSync(path.join(__dirname, db), JSON.stringify({ note }, null, 2));
+
+  fs.writeFileSync(
+    path.join(__dirname, fileName),
+    JSON.stringify({ db }, null, 2)
+  );
 });
 
 module.exports = router;
