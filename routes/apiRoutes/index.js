@@ -48,6 +48,7 @@ router.post("/notes", (req, res) => {
     path.join(__dirname, fileName),
     JSON.stringify({ db }, null, 2)
   );
+  res.json(note);
 });
 
 module.exports = router;
