@@ -1,16 +1,20 @@
 const fs = require("fs");
 const path = require("path");
 const router = require("express").Router();
-const { query } = require("express");
-const { db } = require("../../db/db");
-const fileName = "../../db/db.json";
+
+// const { db } = require("../../db/db");
+const fileName = "./db/db.json";
 
 const { v4: uuidv4 } = require("uuid");
 
+const util = require("util");
+const readFromFile = util.promisify(fs.readFile);
+
 // get all notes
 router.get("/notes", (req, res) => {
-  let results = db;
-  res.json(results);
+  // let results = db;
+  // res.json(results);
+  readFromFile(fileName).then((data) => res.json(JSON.parse(data)));
 });
 
 router.delete("/notes:id", (req, res) => {
