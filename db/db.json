@@ -4,6 +4,16 @@
       "title": "New Note",
       "text": "Test",
       "id": "ecee4b97-2988-4cbc-b82a-7291b0f1c3a7"
+    },
+    {
+      "title": "test new one",
+      "text": "Test, test, test",
+      "id": "dad6ebd4-182b-4f48-a243-2e4dc9ca1663"
+    },
+    {
+      "title": "test new two",
+      "text": "Test, test, test",
+      "id": "83cf66e7-b8ff-4ffb-9edf-2220a2f4c862"
     }
   ]
 }
