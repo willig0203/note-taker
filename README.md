@@ -37,7 +37,7 @@ Use the live app on Heroku: [https://note-taker-gdw.herokuapp.com/](https://note
 
 |     <b>Image running on a mobile device</b>      |
 | :----------------------------------------------: |
-| ![space-2](./Assets/images/Screenshotmobile.jpg) |
+| ![space-2](./Assets/images/ScreenshotMobile.jpg) |
 
 ## License
 
